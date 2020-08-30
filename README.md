@@ -1,8 +1,7 @@
 # Popcorn
 A react native example using expo
 
-![screen shots](https://raw.githubusercontent.com/mostafataghipour/popcorn/master/screenshots/1.jpg)
-![screen shots](https://raw.githubusercontent.com/mostafataghipour/popcorn/master/screenshots/2.jpg)
+<img width="300" alt="light" src="https://raw.githubusercontent.com/MostafaTaghipour/popcorn/master/screenshots/1.jpg"> <img width="300" alt="dark" src="https://raw.githubusercontent.com/MostafaTaghipour/popcorn/master/screenshots/2.jpg">
 
 ## Important libraries
 - expo 37.0.9
