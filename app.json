@@ -1,0 +1,43 @@
+{
+  "expo": {
+    "name": "Popcorn",
+    "slug": "popcorn",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/logo1024.png",
+    "scheme": "popcorn",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "requireFullScreen": true,
+      "icon": "./assets/images/logo1024.png",
+      "bundleIdentifier": "com.popcorn.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#ffffff",
+        "foregroundImage": "./assets/images/logo1024.png"
+      },
+      "icon": "./assets/images/logo1024.png",
+      "package": "com.popcorn.app"
+    },
+    "web": {
+      "icon": "./assets/images/logo1024.png"
+    },
+    "sdkVersion": "37.0.0"
+  }
+}

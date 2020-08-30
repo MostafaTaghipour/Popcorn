@@ -1,0 +1,4 @@
+{
+    "ENVIRONMENT": "production",
+    "API_URL": "https://imdb.hriks.com/"
+}

@@ -1,0 +1,60 @@
+{
+    "next": "Next",
+    "back": "Back",
+    "cancel": "Cancel",
+    "i_got_it": "I got it",
+    "show_more": "Show more",
+    "yes": "Yes",
+    "no": "No",
+    "fake_user_name": "Mostafa",
+    "please_wait": "Please Wait",
+    "no_item": "There is no movie",
+    "try_again": "Try again",
+    "error": {
+        "no_internet": "You are offline",
+        "general": "An error occurred!",
+        "net_general": "Unable to access server"
+    },
+    "home": {
+        "title": "Home",
+        "welcome": "Welcome, Dear %{name}",
+        "user": "User",
+        "please": "Please",
+        "login": "Login",
+        "to_your_account": "to your account",
+        "search_hint": "What you looking for...",
+        "popular": "Popular movies",
+        "top": "Top rated movies"
+    },
+    "categories": {
+        "title": "Categories"
+    },
+    "settings": {
+        "title": "Settings",
+        "dark_mode": "Dark mode",
+        "log_out": "Logout",
+        "are_u_sure": "Are you sure"
+    },
+    "intro": {
+        "title_1": "Do you want to watch a movie?",
+        "desc_1": "In the Popcorn app, you can see the full list of the most up-to-date movies",
+        "title_2": "Find your favorite movie",
+        "desc_2": "You can find the movie you are looking for by searching in different movies and different genres",
+        "title_3": "Enjoy watching the movie",
+        "desc_3": "When you find the movie you are looking for, watch the movie with your family and have fun",
+        "lets_go": "Lets go"
+    },
+    "auth": {
+        "title": "Login to Popcorn",
+        "user_name": "UserName (required)",
+        "password": "Password (required)",
+        "login": "Login",
+        "wrong_credentials": "Wrong credentials"
+    },
+    "search": {
+        "place_holder": "Search..."
+    },
+    "movie": {
+        "directed_by": "Directed by %{name}"
+    }
+}
