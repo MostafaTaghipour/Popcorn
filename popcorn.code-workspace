@@ -7,6 +7,7 @@
 	"settings": {
 		"files.exclude": {
 			"node_modules/": true,
+			"screenshots/": true,
 			".expo/": true,
 			".expo-shared/": true,
 			".vscode/": true,

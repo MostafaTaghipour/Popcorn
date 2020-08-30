@@ -1,5 +1,18 @@
-# react-native-expo-app
-A example using expo and react-native-cli at the same time
+# Popcorn
+A react native example using expo
+
+![screen shots](https://raw.githubusercontent.com/mostafataghipour/popcorn/master/screenshots/1.jpg)
+![screen shots](https://raw.githubusercontent.com/mostafataghipour/popcorn/master/screenshots/2.jpg)
+
+## Important libraries
+- expo 37.0.9
+- react-native 0.61.4
+- react 16.9.0
+- react-navigation
+- react-native-paper
+- redux
+- redux-thunk
+- axios
 
 ## Start Expo
 
@@ -8,13 +21,12 @@ A example using expo and react-native-cli at the same time
 
 ## Run iOS or Android
 
-run `react-native run-ios` or `react-native run-android`;
+run `yarn ios` or `yarn android`;
 
 ## Run test
 
 run `yarn test`
 
-## Custom Icon
 
-Install [app-icon](https://www.npmjs.com/package/app-icon)
-Replace icon.png and run `app-icon generate`;
+
+
