@@ -1,5 +1,5 @@
 import { StyleSheet, View, SafeAreaView, Image } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Title,
   Text,
@@ -13,16 +13,23 @@ import { AuthContext } from "@app/contexts/AuthContext";
 import { Feather } from "@expo/vector-icons";
 import { ScrollView } from "react-native-gesture-handler";
 import Carousel from "@app/components/Carousel";
-import { mockMovies } from "@app/data/mock/movie";
 import { Movie } from "@app/store/movie/types";
 import SlideShow from "@app/components/SlideShow";
 import Layout from "@app/constants/Layout";
 import { useScrollToTop } from "@react-navigation/native";
 import { ThemeContext } from "@app/contexts/ThemeContext";
 import Colors from "@app/constants/Colors";
+import { useReduxSelector } from "@app/store";
+import { useDispatch } from "react-redux";
+import {
+  fetchNewMoviesAsyncAction,
+  fetchTopRatedMoviesAsyncAction,
+  fetchPopularMoviesAsyncAction,
+} from "@app/store/movie/actions";
 
 /**
  * Our Home page
+ *
  * to have a nice home page we use some static fake data
  *
  * @export
@@ -36,9 +43,10 @@ export default function HomeScreen({ navigation }: HomeStackNavProps<"Home">) {
   const { isDark, theme } = useContext(ThemeContext);
   const { isAuthenticated, userName } = useContext(AuthContext);
   const scrollRef = React.useRef(null);
-  const [bestMovies, setBestMovies] = useState<Movie[]>([]);
-  const [popularMovies, setPopularMovies] = useState<Movie[]>([]);
-  const [topMovies, setTopMovies] = useState<Movie[]>([]);
+  const { newMovies, topRatedMovies, popularMovies } = useReduxSelector(
+    (state) => state.movie
+  );
+  const dispatch = useDispatch();
 
   /**
    * scroll to top when tapping on the active tab
@@ -47,13 +55,10 @@ export default function HomeScreen({ navigation }: HomeStackNavProps<"Home">) {
    */
   useScrollToTop(scrollRef);
 
-  /**
-   * to have a nice home page we use some static fake data
-   */
   useEffect(() => {
-    setBestMovies(mockMovies.slice(0, 3));
-    setPopularMovies(mockMovies.slice(3, 7));
-    setTopMovies(mockMovies.slice(7, 11));
+    dispatch(fetchNewMoviesAsyncAction());
+    dispatch(fetchTopRatedMoviesAsyncAction());
+    dispatch(fetchPopularMoviesAsyncAction());
   }, []);
 
   /**
@@ -119,7 +124,7 @@ export default function HomeScreen({ navigation }: HomeStackNavProps<"Home">) {
         </TouchableRipple>
 
         <SlideShow
-          data={bestMovies}
+          data={newMovies.data}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => {
             return <SlideShowItem movie={item} />;
@@ -129,7 +134,7 @@ export default function HomeScreen({ navigation }: HomeStackNavProps<"Home">) {
 
         <Carousel
           title={t("home.popular")}
-          data={popularMovies}
+          data={popularMovies.data}
           contentContainerStyle={styles.carousel}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => {
@@ -139,7 +144,7 @@ export default function HomeScreen({ navigation }: HomeStackNavProps<"Home">) {
 
         <Carousel
           title={t("home.top")}
-          data={topMovies}
+          data={topRatedMovies.data}
           contentContainerStyle={styles.carousel}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => {

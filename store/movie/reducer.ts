@@ -5,7 +5,6 @@ import { MovieState, MovieActions, MovieActionTypes, Movie } from "./types";
 import { AsyncActionStatus } from "@app/types/action";
 import Configs from "@app/constants/Configs";
 
-
 const initialState: MovieState = {
   searchResultMovies: {
     data: [],
@@ -26,6 +25,27 @@ const initialState: MovieState = {
     total: 0,
   },
   categories: {
+    data: [],
+    error: undefined,
+    loading: false,
+    loaded: false,
+    refreshing: false,
+  },
+  topRatedMovies: {
+    data: [],
+    error: undefined,
+    loading: false,
+    loaded: false,
+    refreshing: false,
+  },
+  popularMovies: {
+    data: [],
+    error: undefined,
+    loading: false,
+    loaded: false,
+    refreshing: false,
+  },
+  newMovies: {
     data: [],
     error: undefined,
     loading: false,
@@ -85,6 +105,14 @@ export const reducer: Reducer<MovieState, MovieActions> = (
             },
           };
       }
+
+    case MovieActionTypes.CLEAR_SEARCH_RESULTS:
+      return {
+        ...state,
+        searchResultMovies: {
+          ...initialState.searchResultMovies,
+        },
+      };
 
     case MovieActionTypes.FETCH_CATEGORY_MOVIES:
       switch (action.status) {
@@ -178,13 +206,101 @@ export const reducer: Reducer<MovieState, MovieActions> = (
           };
       }
 
-      case MovieActionTypes.CLEAR_SEARCH_RESULTS:
-        return {
-          ...state,
-          searchResultMovies: {
-            ...initialState.searchResultMovies
-          }
-        };
+    case MovieActionTypes.FETCH_POPULAR_MOVIES:
+      switch (action.status) {
+        case AsyncActionStatus.REQUEST:
+          return {
+            ...state,
+            popularMovies: {
+              ...state.popularMovies,
+              loading: true,
+              error: undefined,
+            },
+          };
+        case AsyncActionStatus.SUCCESS:
+          return {
+            ...state,
+            popularMovies: {
+              ...state.popularMovies,
+              data: action.data || [],
+              loaded: true,
+              loading: false,
+            },
+          };
+        case AsyncActionStatus.FAILURE:
+          return {
+            ...state,
+            popularMovies: {
+              ...state.popularMovies,
+              loading: false,
+              error: action.error,
+            },
+          };
+      }
+
+    case MovieActionTypes.FETCH_TOP_MOVIES:
+      switch (action.status) {
+        case AsyncActionStatus.REQUEST:
+          return {
+            ...state,
+            topRatedMovies: {
+              ...state.topRatedMovies,
+              loading: true,
+              error: undefined,
+            },
+          };
+        case AsyncActionStatus.SUCCESS:
+          return {
+            ...state,
+            topRatedMovies: {
+              ...state.topRatedMovies,
+              data: action.data || [],
+              loaded: true,
+              loading: false,
+            },
+          };
+        case AsyncActionStatus.FAILURE:
+          return {
+            ...state,
+            topRatedMovies: {
+              ...state.topRatedMovies,
+              loading: false,
+              error: action.error,
+            },
+          };
+      }
+
+    case MovieActionTypes.FETCH_NEW_MOVIES:
+      switch (action.status) {
+        case AsyncActionStatus.REQUEST:
+          return {
+            ...state,
+            newMovies: {
+              ...state.newMovies,
+              loading: true,
+              error: undefined,
+            },
+          };
+        case AsyncActionStatus.SUCCESS:
+          return {
+            ...state,
+            newMovies: {
+              ...state.newMovies,
+              data: action.data || [],
+              loaded: true,
+              loading: false,
+            },
+          };
+        case AsyncActionStatus.FAILURE:
+          return {
+            ...state,
+            newMovies: {
+              ...state.newMovies,
+              loading: false,
+              error: action.error,
+            },
+          };
+      }
     default:
       return state;
   }
@@ -193,7 +309,7 @@ export const reducer: Reducer<MovieState, MovieActions> = (
 const persistConfig: PersistConfig<MovieState> = {
   key: "movie",
   storage: AsyncStorage,
-  whitelist: ["categories"],
+  whitelist: ["categories", "popularMovies", "topRatedMovies", "newMovies"],
 };
 
 export const movieReducer = persistReducer(persistConfig, reducer);

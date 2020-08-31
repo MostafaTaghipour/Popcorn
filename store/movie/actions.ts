@@ -5,11 +5,15 @@ import {
   FetchCategoryMoviesAction,
   SearchMoviesAction,
   ClearSearchResultAction,
+  FetchNewMoviesAction,
+  FetchTopRatedMoviesAction,
+  FetchPopularMoviesAction,
 } from "./types";
 import { AsyncActionStatus, PaginationRequestState } from "@app/types/action";
 import MovieApi from "@app/data/remote/MovieApi";
 import { store } from "..";
 import Configs from "@app/constants/Configs";
+import mocker from "@app/net/mocker";
 /**
  * fetch movie categories action
  *
@@ -45,6 +49,123 @@ export const fetchCategoriesAsyncAction = () => {
 };
 
 /**
+ * fetch new movies action
+ *
+ * @return {*}
+ */
+export const fetchNewMoviesAsyncAction = () => {
+  return async (dispatch: any) => {
+    var action: FetchNewMoviesAction = {
+      type: MovieActionTypes.FETCH_NEW_MOVIES,
+      status: AsyncActionStatus.REQUEST,
+    };
+
+    dispatch(action);
+
+    // to decorate our home page we use some fake data
+    mocker.enableMocking();
+
+    try {
+      const response = await MovieApi.new();
+
+      action = {
+        ...action,
+        status: AsyncActionStatus.SUCCESS,
+        data: response.data,
+      };
+      dispatch(action);
+    } catch (error) {
+      action = {
+        ...action,
+        status: AsyncActionStatus.FAILURE,
+        error: error,
+      };
+      dispatch(action);
+    } finally {
+      mocker.disableMocking();
+    }
+  };
+};
+
+/**
+ * fetch popular movies action
+ *
+ * @return {*}
+ */
+export const fetchPopularMoviesAsyncAction = () => {
+  return async (dispatch: any) => {
+    var action: FetchPopularMoviesAction = {
+      type: MovieActionTypes.FETCH_POPULAR_MOVIES,
+      status: AsyncActionStatus.REQUEST,
+    };
+
+    dispatch(action);
+
+    // to decorate our home page we use some fake data
+    mocker.enableMocking();
+
+    try {
+      const response = await MovieApi.popular();
+
+      action = {
+        ...action,
+        status: AsyncActionStatus.SUCCESS,
+        data: response.data,
+      };
+      dispatch(action);
+    } catch (error) {
+      action = {
+        ...action,
+        status: AsyncActionStatus.FAILURE,
+        error: error,
+      };
+      dispatch(action);
+    } finally {
+      mocker.disableMocking();
+    }
+  };
+};
+
+/**
+ * fetch top rated movies action
+ *
+ * @return {*}
+ */
+export const fetchTopRatedMoviesAsyncAction = () => {
+  return async (dispatch: any) => {
+    var action: FetchTopRatedMoviesAction = {
+      type: MovieActionTypes.FETCH_TOP_MOVIES,
+      status: AsyncActionStatus.REQUEST,
+    };
+
+    dispatch(action);
+
+    // to decorate our home page we use some fake data
+    mocker.enableMocking();
+
+    try {
+      const response = await MovieApi.topRated();
+
+      action = {
+        ...action,
+        status: AsyncActionStatus.SUCCESS,
+        data: response.data,
+      };
+      dispatch(action);
+    } catch (error) {
+      action = {
+        ...action,
+        status: AsyncActionStatus.FAILURE,
+        error: error,
+      };
+      dispatch(action);
+    } finally {
+      mocker.disableMocking();
+    }
+  };
+};
+
+/**
  * fetch specific movie category movie action
  *
  * @return {*}
@@ -75,8 +196,6 @@ export const fetchCategoryMovieAsyncAction = (
       page: page,
     };
     dispatch(action);
-
-    
 
     try {
       const limit = Configs.PAGINATION_PAGE_SIZE;

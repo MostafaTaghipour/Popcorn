@@ -13,7 +13,7 @@ const webApi: AxiosInstance = axios.create({
   baseURL: Configs.API_URL,
 });
 
-webApi.defaults.timeout = 60 * 1000;
+webApi.defaults.timeout = 20 * 1000;
 
 webApi.interceptors.request.use(logger.request, logger.error);
 webApi.interceptors.request.use(headerInterceptor.request);
@@ -27,6 +27,5 @@ webApi.interceptors.response.use(
 webApi.interceptors.response.use(logger.response, logger.error);
 
 provideMockData();
-mocker.enableMocking();
 
 export default webApi;

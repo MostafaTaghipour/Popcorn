@@ -28,12 +28,24 @@ export const provideMockData = () => {
     data: { count: mockCategories.length, results: mockCategories },
     method: "get",
   });
-  mocker.addMock("tags", {
+  mocker.addMock("movie/?tags", {
     data: { count: mockMovies.length, results: mockMovies },
     method: "get",
   });
-  mocker.addMock("search", {
+  mocker.addMock("movie/?search", {
     data: { count: mockMovies.length, results: mockMovies },
+    method: "get",
+  });
+  mocker.addMock("movie/new", {
+    data: mockMovies.slice(0, 3),
+    method: "get",
+  });
+  mocker.addMock("movie/top-rated", {
+    data: mockMovies.slice(7, 11),
+    method: "get",
+  });
+  mocker.addMock("movie/popular", {
+    data: mockMovies.slice(3, 7),
     method: "get",
   });
 };

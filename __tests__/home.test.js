@@ -2,6 +2,7 @@ import React from "react";
 import HomeScreen from "../screens/Home/HomeScreen";
 import { MockedNavigator } from "../navigation/MockedNavigator";
 import { render } from "react-native-testing-library";
+import thunk from "redux-thunk";
 import configureStore from "redux-mock-store";
 
 /**
@@ -15,13 +16,18 @@ describe("Home render", () => {
    * initialize mock redux store
    */
   beforeAll(() => {
-    const middlewares = [];
+    const middlewares = [thunk];
     const mockStore = configureStore(middlewares);
 
     // Initialize mockstore
     initialState = {
       auth: {
         token: undefined,
+      },
+      movie: {
+        topRatedMovies: {},
+        popularMovies: {},
+        newMovies: {},
       },
     };
     store = mockStore(initialState);

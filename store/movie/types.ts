@@ -34,14 +34,20 @@ export interface MovieState {
   lastSeenCategory?: string;
   searchResultMovies: PaginationRequestState<Movie[]>;
   categories: RequestState<Category[]>;
+  newMovies: RequestState<Movie[]>;
+  topRatedMovies: RequestState<Movie[]>;
+  popularMovies: RequestState<Movie[]>;
 }
 
 // actions
 export enum MovieActionTypes {
   SEARCH_MOVIES = "SEARCH_MOVIES",
+  CLEAR_SEARCH_RESULTS = "CLEAR_SEARCH_RESULTS",
   FETCH_CATEGORY_MOVIES = "FETCH_CATEGORY_MOVIES",
   FETCH_CATEGORIES = "FETCH_CATEGORIES",
-  CLEAR_SEARCH_RESULTS = "CLEAR_SEARCH_RESULTS",
+  FETCH_NEW_MOVIES = "FETCH_NEW_MOVIES",
+  FETCH_TOP_MOVIES = "FETCH_TOP_MOVIES",
+  FETCH_POPULAR_MOVIES = "FETCH_POPULAR_MOVIES",
 }
 
 export interface FetchCategoryMoviesAction
@@ -52,14 +58,26 @@ export interface FetchCategoryMoviesAction
 export interface SearchMoviesAction
   extends ApiPaginationAction<MovieActionTypes.SEARCH_MOVIES, Movie[]> {}
 
+export interface ClearSearchResultAction
+  extends Action<MovieActionTypes.CLEAR_SEARCH_RESULTS> {}
+
 export interface FetchCategoriesAction
   extends ApiAction<MovieActionTypes.FETCH_CATEGORIES, Category[]> {}
 
-export interface ClearSearchResultAction
-  extends Action<MovieActionTypes.CLEAR_SEARCH_RESULTS> {}
+export interface FetchNewMoviesAction
+  extends ApiAction<MovieActionTypes.FETCH_NEW_MOVIES, Movie[]> {}
+
+export interface FetchTopRatedMoviesAction
+  extends ApiAction<MovieActionTypes.FETCH_TOP_MOVIES, Movie[]> {}
+
+export interface FetchPopularMoviesAction
+  extends ApiAction<MovieActionTypes.FETCH_POPULAR_MOVIES, Movie[]> {}
 
 export type MovieActions =
   | FetchCategoryMoviesAction
   | SearchMoviesAction
+  | ClearSearchResultAction
   | FetchCategoriesAction
-  | ClearSearchResultAction;
+  | FetchNewMoviesAction
+  | FetchTopRatedMoviesAction
+  | FetchPopularMoviesAction;

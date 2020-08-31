@@ -53,4 +53,35 @@ export default class MovieApi {
       `movie/?search=${query}&limit=${limit}&offset=${offset}`
     );
   }
+
+  /**
+   * get new movies 
+   *
+   * @static
+   * @return {*}  {Promise<AxiosResponse<Movie[]>>}
+   * @memberof MovieApi
+   */
+  static new(): Promise<AxiosResponse<Movie[]>> {
+    return webApi.get<Movie[]>(`movie/new`);
+  }
+  /**
+   * get top rated movies 
+   *
+   * @static
+   * @return {*}  {Promise<AxiosResponse<Movie[]>>}
+   * @memberof MovieApi
+   */
+  static topRated(): Promise<AxiosResponse<Movie[]>> {
+    return webApi.get<Movie[]>(`movie/top-rated`);
+  }
+  /**
+   * get popular movies 
+   *
+   * @static
+   * @return {*}  {Promise<AxiosResponse<Movie[]>>}
+   * @memberof MovieApi
+   */
+  static popular(): Promise<AxiosResponse<Movie[]>> {
+    return webApi.get<Movie[]>(`movie/popular`);
+  }
 }
